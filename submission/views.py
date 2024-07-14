@@ -6,16 +6,23 @@ def send_submission_email(request):
     if request.method == 'POST':
         # Load the screenshot file
         screenshot_path = os.path.join(os.getcwd(), 'confirmation_screenshot.png')
-
+        github_repo_link = 'https://github.com/rama8115/form_automation.git'
+        document_path = os.path.join(os.getcwd(), 'documentation.docx')
+    
+        # Create email
+        email_body = f"""
         
+        GitHub Repository : {github_repo_link}
+        
+        """
         email = EmailMessage(
             subject='Python (Selenium) Assignment - Ramanand Kumar Gupt',
-            body='Please find attached the screenshot of the confirmation page.',
+            body=email_body,
             from_email='babu.doctor.raman@gmail.com',
-            to=['gupta.doctor.raman@gmail.com'],
-            cc=['gupta.doctor.raman@gmail.com'],
+            to=['tech@themedius.a'],
+            cc=['hr@themedius.ai'],
         )
-        email.attach()
+        email.attach_file(document_path)
         email.attach_file(screenshot_path)
 
         # Send the email
